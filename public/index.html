@@ -128,6 +128,7 @@
   .badge-transport { background: var(--blue); color: #fff; }
   .badge-food { background: var(--green); color: #000; }
   .badge-scam { background: var(--purple); color: #fff; }
+  .badge-surf { background: #00b4d8; color: #fff; }
   .card h3 {
     font-family: 'Archivo Black', sans-serif; font-size: 20px;
     text-transform: uppercase; line-height: 1.2; margin-bottom: 12px;
@@ -285,11 +286,12 @@
 <nav>
   <a class="logo" onclick="showPage('home')"><img src="/logo.jpg" alt="The Complaining Nomad"><div class="logo-text">The <span>Complaining</span> Nomad</div></a>
   <ul class="nav-links">
-    <li><a href="#" onclick="showPage('home')">Home</a></li>
-    <li><a href="#">Hostel Horrors</a></li>
-    <li><a href="#">Transport Nightmares</a></li>
-    <li><a href="#">Food Poisoning Diaries</a></li>
-    <li><a href="#">Scam Stories</a></li>
+    <li><a href="#" onclick="filterCategory(null);showPage('home');return false">Home</a></li>
+    <li><a href="#" onclick="filterCategory('hostel');return false">Hostel Horrors</a></li>
+    <li><a href="#" onclick="filterCategory('transport');return false">Transport Nightmares</a></li>
+    <li><a href="#" onclick="filterCategory('food');return false">Food Poisoning Diaries</a></li>
+    <li><a href="#" onclick="filterCategory('scam');return false">Scam Stories</a></li>
+    <li><a href="#" onclick="filterCategory('surf');return false">Surf Trips Gone Wrong</a></li>
     <li><a href="#">Submit Your Story</a></li>
   </ul>
 </nav>
@@ -309,7 +311,7 @@
   <div class="section-title">Latest Stories</div>
 
   <div class="article-grid">
-    <a class="card" onclick="showPage('hostel')">
+    <a class="card" data-category="hostel" onclick="showPage('hostel')">
       <img class="card-img" src="https://images.unsplash.com/photo-1709805619372-40de3f158e83?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-hostel">Hostel Horrors</div>
@@ -322,7 +324,7 @@
       </div>
     </a>
 
-    <a class="card" onclick="showPage('transport')">
+    <a class="card" data-category="transport" onclick="showPage('transport')">
       <img class="card-img" src="https://images.unsplash.com/photo-1658996879893-e9f225b8ece9?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-transport">Transport Nightmares</div>
@@ -335,7 +337,7 @@
       </div>
     </a>
 
-    <a class="card" onclick="showPage('food')">
+    <a class="card" data-category="food" onclick="showPage('food')">
       <img class="card-img" src="https://images.unsplash.com/photo-1519396653448-212e3c1566aa?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-food">Food Poisoning Diaries</div>
@@ -348,7 +350,7 @@
       </div>
     </a>
 
-    <a class="card" onclick="showPage('scam')">
+    <a class="card" data-category="scam" onclick="showPage('scam')">
       <img class="card-img" src="https://images.unsplash.com/photo-1536237717235-0acadb345d8c?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-scam">Scam Stories</div>
@@ -360,7 +362,7 @@
         </div>
       </div>
     </a>
-    <a class="card" onclick="showPage('bangkok')">
+    <a class="card" data-category="hostel" onclick="showPage('bangkok')">
       <img class="card-img" src="https://images.unsplash.com/photo-1691576259634-28d34508cb60?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-hostel">Hostel Horrors</div>
@@ -370,7 +372,7 @@
       </div>
     </a>
 
-    <a class="card" onclick="showPage('flight')">
+    <a class="card" data-category="transport" onclick="showPage('flight')">
       <img class="card-img" src="https://images.unsplash.com/photo-1529932072400-fce439b47d38?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-transport">Transport Nightmares</div>
@@ -380,7 +382,7 @@
       </div>
     </a>
 
-    <a class="card" onclick="showPage('delhi')">
+    <a class="card" data-category="food" onclick="showPage('delhi')">
       <img class="card-img" src="https://images.unsplash.com/photo-1766056586808-987b0ab63cdd?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-food">Food Poisoning Diaries</div>
@@ -390,13 +392,43 @@
       </div>
     </a>
 
-    <a class="card" onclick="showPage('rome')">
+    <a class="card" data-category="scam" onclick="showPage('rome')">
       <img class="card-img" src="https://images.unsplash.com/photo-1762769292916-bb61e012d276?w=800&q=75" alt="">
       <div class="card-body">
         <div class="card-badge badge-scam">Scam Stories</div>
         <h3>The Meter Is Broken, My Friend</h3>
         <p class="excerpt">A Roman taxi driver, a scenic route through most of Lazio, and a fare that could have bought dinner at Roscioli. With wine.</p>
         <div class="card-meta"><span>Rome, Italy</span><span>6 min read</span></div>
+      </div>
+    </a>
+
+    <a class="card" data-category="surf" onclick="showPage('surf-bali')">
+      <img class="card-img" src="https://images.unsplash.com/photo-1584874546125-20bde24f1088?w=800&q=75" alt="">
+      <div class="card-body">
+        <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
+        <h3>Six Hours for a Lake</h3>
+        <p class="excerpt">Flew to Bali. Bought a new board bag. The ocean was flat for an entire week. Davo back home posted pumping Cronulla.</p>
+        <div class="card-meta"><span>Bali, Indonesia</span><span>6 min read</span></div>
+      </div>
+    </a>
+
+    <a class="card" data-category="surf" onclick="showPage('surf-reef')">
+      <img class="card-img" src="https://images.unsplash.com/photo-1612651725650-4e75324507b8?w=800&q=75" alt="">
+      <div class="card-body">
+        <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
+        <h3>The Reef Always Wins</h3>
+        <p class="excerpt">Thought I was ready for Indonesian reef breaks. The ocean disagreed. My left leg looked like a dropped lasagna.</p>
+        <div class="card-meta"><span>Indonesia</span><span>7 min read</span></div>
+      </div>
+    </a>
+
+    <a class="card" data-category="surf" onclick="showPage('surf-srilanka')">
+      <img class="card-img" src="https://images.unsplash.com/photo-1760349212773-2a5508b12444?w=800&q=75" alt="">
+      <div class="card-body">
+        <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
+        <h3>Outperformed by a Ten-Year-Old on a SpongeBob Board</h3>
+        <p class="excerpt">Rented a board held together with duct tape. It snapped. The next one had no fins. Ended up bodyboarding.</p>
+        <div class="card-meta"><span>Weligama, Sri Lanka</span><span>6 min read</span></div>
       </div>
     </a>
 
@@ -835,6 +867,140 @@
   </div>
 </div>
 
+<!-- ==================== SURF BALI ARTICLE ==================== -->
+<div id="page-surf-bali" class="page">
+  <a class="back-link" onclick="showPage('home')">← Back to stories</a>
+  <div class="article-hero">
+    <img src="https://images.unsplash.com/photo-1584874546125-20bde24f1088?w=1600&q=80" alt="">
+    <div class="article-hero-overlay"></div>
+    <div class="article-hero-content">
+      <div class="category-badge badge-surf">Surf Trips Gone Wrong</div>
+      <h1>Six Hours for a <span class="hl">Lake</span></h1>
+      <p class="subtitle">Flew to Bali with a brand new board bag. The ocean was completely, insultingly flat.</p>
+      <div class="meta"><span>Bali, Indonesia</span><span class="dot"></span><span>6 min read</span></div>
+    </div>
+  </div>
+  <div class="article-body">
+    <h3>The Forecast Said "Head High." The Forecast Lied.</h3>
+    <p>I'd like to tell you I did my research. That I checked the swell charts, cross-referenced Surfline with Magic Seaweed, studied the wind patterns like a man possessed. And I did. All of it pointed to Bali in late March being a perfectly reasonable decision. Six-hour flight from Sydney, two weeks of annual leave burning a hole in my inbox, and a freshly purchased 250-buck board bag that I'd convinced myself was an investment. The ocean had other plans.</p>
+    <p>I landed in Denpasar at 11pm, sticky and optimistic. By 6am the next morning I was standing on the beach at low tide, looking at what can only be described as a swimming pool. Not one of those flash infinity pools that blends into the horizon. A municipal pool. The kind with a bandaid floating in it. Flat. Completely, insultingly flat.</p>
+    <h3>Welcome to the Waiting Room</h3>
+    <p>The surf camp I'd booked was full of blokes just like me. Twelve sunburnt idiots who'd all flown in from various corners of the world, clutching board bags and expectations, now sitting around a communal table eating nasi goreng at 9am because there was genuinely nothing else to do. The vibe was funeral. Imagine a support group, but instead of sharing feelings, everyone just kept refreshing Windguru on their phones and sighing.</p>
+    <p>And then there were the locals. The guys who'd been here long enough to have seen waves. They loved telling you about it too.</p>
+    <p>"Bro, you should've been here last week. Padang was six foot and glassy. Best session of my life."</p>
+    <p>Cheers mate. Really helpful. I'll just pop into my time machine, shall I?</p>
+    <p>Every single person I met had some version of this story. Last week. Three days ago. Yesterday afternoon, even, though I'm fairly sure that one was a lie because I'd been staring at the ocean yesterday afternoon and the most exciting thing that happened was a plastic bag drifting past.</p>
+    <div class="pullquote"><p>"Bro, you should've been here last week." Cheers mate. I'll just pop into my time machine, shall I?</p></div>
+    <h3>Day Three and the Bintang Shirts Start Making Sense</h3>
+    <p>By day three I'd stopped waking up early to check the surf. What's the point? I knew what was out there. Lake Bali. The great Indonesian puddle. I started sleeping until nine, eating banana pancakes for breakfast, reading a book by the pool. I was becoming the exact type of tourist I'd always judged. Next I'd be buying a singlet with "One More Bintang" printed on it and haggling over a fake Rolex in Kuta.</p>
+    <p>The board bag sat in the corner of my room like an accusation. Brand new. Tags still half on. The board inside it hadn't touched salt water. I'd carried that thing through three airports and a taxi ride where the driver strapped it to the roof with what appeared to be a shoelace, and for what? It was a 1,400-buck surfboard-shaped paperweight.</p>
+    <h3>The Paddle of Shame</h3>
+    <p>Day five, I cracked. I couldn't sit there any longer. There was something out there that could generously be described as movement on the water's surface. Ankle high, maybe knee high if you were feeling extremely charitable and also happened to be kneeling. I paddled out anyway. Three of us did, actually. Nobody spoke. We all knew this was pathetic and we'd all silently agreed not to acknowledge it.</p>
+    <p>I caught a wave. I use that term loosely. It was more like the ocean gently nudged me shoreward, the way you'd guide a confused elderly person back to their seat. I stood up for about two seconds before the wave lost interest in its own existence and dissolved into nothing. I rode that thing for maybe four metres. On the beach, a dog watched me with what I can only describe as pity.</p>
+    <p>I paddled back out. Sat there for another forty minutes. Caught one more mushy little nothing-burger, then went in and ordered a Bintang at 10:30 in the morning because honestly, what else was there?</p>
+    <h3>Meanwhile, Back in Reality</h3>
+    <p>The real knife twist came from Instagram. My mate Davo, back home in Cronulla, posted a video of our local break absolutely pumping. Head high, offshore winds, not a cloud in the sky. Clean lines stacking up to the horizon. He captioned it "Just another Tuesday" with a shrug emoji, the smug bastard.</p>
+    <p>I did the maths in my head. Flight was 800 bucks return. Surf camp was 120 a night. Board bag, 250. New rashie I didn't need, 60. I was roughly two grand deep into a holiday where the most surfing I'd done was watching Point Break on my laptop in bed while eating room service spring rolls. I could've stayed home, surfed every day for free, and spent the two grand on literally anything else.</p>
+    <h3>The Flat Acceptance</h3>
+    <p>By day seven I'd made peace with it. Not gracefully. More like the way you accept a parking fine. You know it's happened, you know there's nothing you can do, and you're mostly just annoyed at yourself for not reading the sign properly. I spent the last day getting a massage, eating satay on the beach, watching the sunset over water so still it looked like someone had poured resin over the Indian Ocean.</p>
+    <p>Flying home, I looked down at the ocean from 30,000 feet. From up there, you could see the swell lines rolling in towards the coast. Beautiful, perfect swell lines. Arriving approximately six hours after my plane touched down in Sydney. I pressed my forehead against the window and laughed, because if you don't laugh you'll throw your board bag into the sea. Which would be easy, since the sea was basically a footpath.</p>
+    <div class="rating-box">
+      <div class="label">Complaining Nomad Rating</div>
+      <div class="score">1<span>/10</span></div>
+      <div class="verdict">One point for the nasi goreng. Ocean gets zero.</div>
+    </div>
+    <div class="tags"><a href="#">Bali</a><a href="#">Indonesia</a><a href="#">Flat Spell</a><a href="#">Surf Trips Gone Wrong</a><a href="#">Board Bag Regret</a></div>
+  </div>
+</div>
+
+<!-- ==================== SURF REEF ARTICLE ==================== -->
+<div id="page-surf-reef" class="page">
+  <a class="back-link" onclick="showPage('home')">← Back to stories</a>
+  <div class="article-hero">
+    <img src="https://images.unsplash.com/photo-1612651725650-4e75324507b8?w=1600&q=80" alt="">
+    <div class="article-hero-overlay"></div>
+    <div class="article-hero-content">
+      <div class="category-badge badge-surf">Surf Trips Gone Wrong</div>
+      <h1>The Reef <span class="hl">Always Wins</span></h1>
+      <p class="subtitle">Three years of beach breaks. Then Indonesian reef taught me what shallow really means.</p>
+      <div class="meta"><span>Indonesia</span><span class="dot"></span><span>7 min read</span></div>
+    </div>
+  </div>
+  <div class="article-body">
+    <h3>The Confidence Was the First Thing to Break</h3>
+    <p>I'd been surfing for about three years when I decided I was ready for Indonesian reef breaks. Three years of mushy beach breaks on the east coast, the odd decent day at a point break, and one trip to Bali where I rode whitewash at Kuta and called it progression. In my head I was intermediate-to-advanced. In reality I was a kook with a tan and a shortboard I had no business riding.</p>
+    <p>But I'd watched the clips. I'd studied the lineups on Google Earth like some kind of wave-hunting intelligence analyst. I knew the tides, the swell direction, the wind windows. What I didn't know, and what no YouTube video will ever properly communicate, is how shallow a shallow reef break actually is. We're talking shin-deep water over coral that looks like it was designed by someone who hates human skin.</p>
+    <h3>The Ocean Said No</h3>
+    <p>The first couple of waves I caught were fine. Small ones, inside ones, the kind the locals let you have because they're barely worth the effort. I was buzzing. Hooting at myself like a complete dropkick. Then I paddled for one that was a bit bigger, a bit steeper, a bit further outside than I had any right to be.</p>
+    <p>I made the drop. For about one and a half seconds I was the guy in the edit, rail buried, spray flying, living the dream. Then the bottom dropped out and I went with it. Face first, arms flailing, straight into the washing machine. Except this washing machine had a floor made of broken glass and razor blades, and it was about forty centimetres below the surface.</p>
+    <div class="pullquote"><p>I came up and looked down at my leg and it looked like a dropped lasagna.</p></div>
+    <p>The reef grabbed me like it had a personal grudge. I felt it rake across my hip, my thigh, my knee, my shin, my ankle. Just one long continuous scrape from waist to foot, like someone had taken a cheese grater to my entire left side. I came up gasping and looked down at my leg and it looked like a dropped lasagna.</p>
+    <h3>The Paddle of Shame</h3>
+    <p>Here's the thing about getting destroyed at a spot where Indonesian locals have been surfing since before you were born. They've seen it. A thousand times. There's no sympathy coming your way. A couple of guys paddled past me on my way in and one of them gave me this look that was somewhere between amusement and mild pity, the way you'd look at a dog that just ran into a glass door.</p>
+    <p>I belly-rode the whitewater in because I couldn't stand on my board without my leg feeling like it was on fire. Every bump over a section of reef sent a fresh jolt through me. Blood was running down my ankle and mixing with the saltwater and honestly it looked far worse than it was. Or maybe it was exactly as bad as it looked. Hard to say when you're trying not to cry in front of a twelve-year-old local kid who just pulled into the barrel of the day.</p>
+    <h3>Betadine and Broken Pride</h3>
+    <p>I limped up the cliff path leaving a trail of watered-down blood on the limestone stairs like some kind of injured animal. Found my way to the nearest warung and sat down on a plastic chair and ordered a Bintang because priorities. The woman running the place took one look at my leg and disappeared out back, returning with a bottle of Betadine and a look that said she does this three times a week.</p>
+    <p>She dabbed the Betadine on without warning and I made a noise that I'm not proud of. Somewhere between a yelp and a whimper. A grown man, sitting in a warung at eleven in the morning, beer in one hand, making sounds like a wounded bird while a tiny Indonesian woman cleaned gravel out of his leg. I tipped her about 50,000 rupiah which is roughly five bucks and felt like it should have been more.</p>
+    <h3>The Bed Situation</h3>
+    <p>Nobody warns you about the sleeping part. You survive the reef, you survive the cleanup, you think the worst is over. It is not over. The worst part of reef rash is trying to sleep in a cheap guesthouse where the sheets have the thread count of sandpaper and the humidity is running at about nine hundred percent.</p>
+    <p>You lie on your good side. Fine for twenty minutes. Then you shift. The sheet peels off your wound like a wax strip and you're suddenly wide awake, staring at the ceiling fan, questioning every decision that led you to this bed in this room in this country. You try sleeping on your back. The sheet sticks again. You try sleeping with no sheet. The mosquitoes find you in under a minute. You try wrapping your leg in a sarong. It sticks worse than the sheet.</p>
+    <p>I spent three nights barely sleeping, peeling fabric off my leg every time I moved, applying Betadine in the dark like some kind of midnight nurse, and lying there listening to the geckos on the wall wondering if this is what surf magazines mean by "the trip of a lifetime."</p>
+    <h3>Would I Do It Again</h3>
+    <p>I went back out two days later because I am not a smart man. Caught two waves on the inside, both tiny, both forgettable. Came in voluntarily before the reef could finish what it started. Sat in the warung with another Bintang and watched the guys who actually knew what they were doing thread through sections that would have sent me to a hospital in Denpasar.</p>
+    <p>I've still got a scar on my left shin that goes white when I get cold. My mates reckon it looks tough. I tell them it was bigger than it was, because that's what you do. But late at night, when I'm lying in a proper bed with proper sheets that don't stick to anything, I can still feel that reef under my skin, reminding me of the day the Indian Ocean looked me dead in the eye and said mate, you are not ready for this.</p>
+    <div class="rating-box">
+      <div class="label">Complaining Nomad Rating</div>
+      <div class="score">2<span>/10</span></div>
+      <div class="verdict">One point for the Betadine lady. One for the Bintang.</div>
+    </div>
+    <div class="tags"><a href="#">Indonesia</a><a href="#">Reef Break</a><a href="#">Surf Trips Gone Wrong</a><a href="#">Reef Rash</a><a href="#">Betadine</a></div>
+  </div>
+</div>
+
+<!-- ==================== SURF SRI LANKA ARTICLE ==================== -->
+<div id="page-surf-srilanka" class="page">
+  <a class="back-link" onclick="showPage('home')">← Back to stories</a>
+  <div class="article-hero">
+    <img src="https://images.unsplash.com/photo-1760349212773-2a5508b12444?w=1600&q=80" alt="">
+    <div class="article-hero-overlay"></div>
+    <div class="article-hero-content">
+      <div class="category-badge badge-surf">Surf Trips Gone Wrong</div>
+      <h1>Outperformed by a Ten-Year-Old on a <span class="hl">SpongeBob Board</span></h1>
+      <p class="subtitle">The board snapped. The next one had no fins. I ended up bodyboarding.</p>
+      <div class="meta"><span>Weligama, Sri Lanka</span><span class="dot"></span><span>6 min read</span></div>
+    </div>
+  </div>
+  <div class="article-body">
+    <h3>The Board That Hope Built</h3>
+    <p>I've made some questionable decisions in my life but handing over 1,500 rupees for a surfboard held together with duct tape and what I can only assume was spiritual conviction ranks pretty high. The guy at the rental shack picked it up like he was presenting a newborn. "Very strong board, brother. No problem." There was a crack running down the middle that you could fit a coin into. The nose had been reattached at some point using what looked like bathroom sealant. I took it anyway because the next nearest rental place was apparently "just down the road" which in Sri Lankan terms means somewhere between twenty minutes and next Tuesday.</p>
+    <h3>Two Waves and a Funeral</h3>
+    <p>I paddled out feeling optimistic, which should have been my first warning sign. The first wave was fine. A gentle little thing, barely worth standing up for, but I stood up anyway and felt briefly like a person who knew what they were doing. Wave number two was slightly bigger. Nothing scary. Maybe chest high on a short day. I popped up, started trimming along the face, heard a sound like someone snapping a cricket bat over their knee, and then I was underwater holding two separate pieces of surfboard.</p>
+    <p>I surfaced to find the rental guy already waving from the beach. Not waving with concern. Waving like he wanted to have a chat about payment for damages. Mate, the thing was already damaged when I got it. That's like buying a car with no engine and getting billed when it won't start.</p>
+    <div class="pullquote"><p>He had this way of looking disappointed in me that reminded me of my dad and I just handed over the money.</p></div>
+    <p>We had a fifteen-minute negotiation that ended with me paying another 800 bucks for the privilege of having destroyed something that was already destroyed. I'm not proud of how quickly I caved but he had this way of looking disappointed in me that reminded me of my dad and I just handed over the money.</p>
+    <h3>Board Number Two, or "The Finless Wonder"</h3>
+    <p>Further down the beach there was another place renting boards. This one looked more legit. The boards were standing upright in a rack instead of lying in the sand next to a sleeping dog. Progress. I picked out a decent-looking 7'2 and carried it to the water before noticing something was off. Flipped it over. No fins. Not like the fins were broken. The fin boxes were there but completely empty, just three little rectangular holes staring up at me like the board was as surprised as I was.</p>
+    <p>I walked back. "This one has no fins." The guy looked at it, looked at me, nodded slowly, and said "Yes." That was it. Yes. Like I'd pointed out that the sky was blue. He didn't offer a solution or a different board. Just confirmed the observation and went back to his phone.</p>
+    <p>I tried two more boards from his rack. One had fins but was so waterlogged it weighed about as much as a small fridge. The other was a shortboard designed for someone who weighs sixty kilos and actually knows how to surf, so that ruled me out on both counts.</p>
+    <h3>The Great Equipment Hunt of Weligama</h3>
+    <p>What followed was an hour-long march through town asking everyone if they knew where I could rent a surfboard that functioned as a surfboard. A tuk-tuk driver offered to take me to his cousin's place. A woman at a grocery shop pointed vaguely toward the south. A bloke at a guesthouse said he had one I could borrow but when he brought it out it was a windsurf board from what appeared to be 1987, complete with a mast hole in the middle. I stared at it for a while. He stared at me staring at it. Neither of us said anything.</p>
+    <p>The heat was getting unbearable and I'd sweated through my rashie twice over. I sat on the seawall, drank a King Coconut that cost me 50 bucks, and watched the ocean mock me with perfect little peeling waves that were going completely unridden.</p>
+    <h3>Humbled by a Ten-Year-Old</h3>
+    <p>That's when I noticed the kid. Couldn't have been older than ten. Skinny little legend on a foam bodyboard, absolutely tearing the place apart. He was launching off sections, pulling into closeouts on purpose just for laughs, and paddling back out faster than I could on a good day with flippers. I watched him for a solid twenty minutes with a mixture of admiration and deep personal shame.</p>
+    <p>During a lull he paddled in and sat near me on the sand. We got talking. His English was way better than my Sinhala, which consists entirely of the word "thank you" pronounced badly. I told him I couldn't find a board. He looked at me with genuine pity, the kind of pity a surgeon gives you before delivering bad news, and said "You can use mine."</p>
+    <p>So that's how I ended up bodyboarding in Sri Lanka. Thirty-one years old, lying on a bright yellow foam board that had SpongeBob on it, getting repeatedly pummelled by waves that this child had been styling on minutes earlier. Every time I caught one he'd cheer from the beach. Encouraging. Supportive. The way you cheer for a dog that finally learns to shake hands.</p>
+    <h3>Lessons from the Foam</h3>
+    <p>I gave the board back after an hour, bought the kid an ice cream that cost less than a single fin plug, and walked back to my guesthouse smelling like reef and failure. My shoulders were sunburned in the shape of the rashie I'd taken off because it was too hot, which meant I looked like a human neapolitan ice cream for the rest of the week.</p>
+    <p>Somewhere in that town there are still surfboards with no fins and surfboards held together with tape and surfboards that are technically windsurfers. And somewhere on that beach there's a ten-year-old kid on a SpongeBob bodyboard who surfs better than I ever will. I think about him sometimes, usually when I'm buying expensive gear I don't deserve, and I reckon he's still out there, ripping, not needing any of it.</p>
+    <div class="rating-box">
+      <div class="label">Complaining Nomad Rating</div>
+      <div class="score">3<span>/10</span></div>
+      <div class="verdict">Three points. One for the kid. One for the King Coconut. One for the windsurf board from 1987.</div>
+    </div>
+    <div class="tags"><a href="#">Sri Lanka</a><a href="#">Weligama</a><a href="#">Surf Trips Gone Wrong</a><a href="#">Broken Board</a><a href="#">Bodyboarding</a></div>
+  </div>
+</div>
+
 <footer>
   <img src="/logo.jpg" alt="" style="width:60px;height:60px;border-radius:10px;object-fit:cover;margin-bottom:16px">
   <div class="logo-f">The <span>Complaining</span> Nomad</div>
@@ -846,6 +1012,20 @@ function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + id).classList.add('active');
   window.scrollTo(0, 0);
+}
+function filterCategory(cat) {
+  showPage('home');
+  const cards = document.querySelectorAll('.card[data-category]');
+  const title = document.querySelector('.section-title');
+  if (!cat) {
+    cards.forEach(c => c.style.display = '');
+    title.textContent = 'Latest Stories';
+    return;
+  }
+  const names = {hostel:'Hostel Horrors',transport:'Transport Nightmares',food:'Food Poisoning Diaries',scam:'Scam Stories',surf:'Surf Trips Gone Wrong'};
+  cards.forEach(c => c.style.display = c.dataset.category === cat ? '' : 'none');
+  title.textContent = names[cat] || cat;
+  document.querySelector('.section-title').scrollIntoView({behavior:'smooth'});
 }
 </script>
 
