@@ -1,1 +1,10 @@
-.vercel
+node_modules
+
+/.cache
+/build
+.env
+
+.DS_Store
+old-site
+public-backup
+public-data

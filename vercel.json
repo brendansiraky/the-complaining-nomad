@@ -1,5 +1,8 @@
 {
-  "buildCommand": null,
-  "outputDirectory": "public",
-  "cleanUrls": true
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ]
 }
