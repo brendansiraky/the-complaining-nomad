@@ -292,7 +292,7 @@
     <li><a href="#" onclick="filterCategory('food');return false">Food Poisoning Diaries</a></li>
     <li><a href="#" onclick="filterCategory('scam');return false">Scam Stories</a></li>
     <li><a href="#" onclick="filterCategory('surf');return false">Surf Trips Gone Wrong</a></li>
-    <li><a href="#">Submit Your Story</a></li>
+    <li><a href="#" onclick="showPage('submit');return false">Submit Your Story</a></li>
   </ul>
 </nav>
 
@@ -998,6 +998,46 @@
       <div class="verdict">Three points. One for the kid. One for the King Coconut. One for the windsurf board from 1987.</div>
     </div>
     <div class="tags"><a href="#">Sri Lanka</a><a href="#">Weligama</a><a href="#">Surf Trips Gone Wrong</a><a href="#">Broken Board</a><a href="#">Bodyboarding</a></div>
+  </div>
+</div>
+
+<!-- ==================== SUBMIT PAGE ==================== -->
+<div id="page-submit" class="page">
+  <a class="back-link" onclick="showPage('home')">← Back to stories</a>
+  <div style="max-width:720px;margin:0 auto;padding:120px 24px 80px">
+    <h2 style="font-family:'Archivo Black',sans-serif;font-size:clamp(28px,4vw,48px);text-transform:uppercase;line-height:1.1;margin-bottom:12px;color:#fff">Got a Travel <span style="color:var(--accent)">Horror Story?</span></h2>
+    <p style="color:var(--text-muted);font-size:18px;margin-bottom:48px;line-height:1.7">We want your worst. The hostel that should be condemned. The bus ride that broke you. The food that fought back. The scam you walked right into. If it went wrong, we want to hear about it.</p>
+    <form style="display:flex;flex-direction:column;gap:24px" onsubmit="event.preventDefault();this.querySelector('button').textContent='Story Submitted! 🎉';this.querySelector('button').style.background='var(--green)'">
+      <div>
+        <label style="font-family:'Archivo Black',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);display:block;margin-bottom:8px">Your Name</label>
+        <input type="text" placeholder="What should we call you?" style="width:100%;padding:14px 18px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;border-radius:0;outline:none" required>
+      </div>
+      <div>
+        <label style="font-family:'Archivo Black',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);display:block;margin-bottom:8px">Email</label>
+        <input type="email" placeholder="We'll only use this to follow up" style="width:100%;padding:14px 18px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;border-radius:0;outline:none" required>
+      </div>
+      <div>
+        <label style="font-family:'Archivo Black',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);display:block;margin-bottom:8px">Category</label>
+        <select style="width:100%;padding:14px 18px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;border-radius:0;outline:none">
+          <option>Hostel Horrors</option>
+          <option>Transport Nightmares</option>
+          <option>Food Poisoning Diaries</option>
+          <option>Scam Stories</option>
+          <option>Surf Trips Gone Wrong</option>
+          <option>Other (we'll figure it out)</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-family:'Archivo Black',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);display:block;margin-bottom:8px">Where did it happen?</label>
+        <input type="text" placeholder="City, country, or 'somewhere I'd rather forget'" style="width:100%;padding:14px 18px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;border-radius:0;outline:none" required>
+      </div>
+      <div>
+        <label style="font-family:'Archivo Black',sans-serif;font-size:12px;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);display:block;margin-bottom:8px">Your Story</label>
+        <textarea placeholder="Tell us everything. The worse it was, the better it reads. Don't hold back." rows="10" style="width:100%;padding:14px 18px;background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;border-radius:0;outline:none;resize:vertical" required></textarea>
+      </div>
+      <p style="color:var(--text-muted);font-size:14px;line-height:1.6">By submitting, you're giving us permission to edit and publish your story. We'll keep your voice and credit you (or keep you anonymous if you prefer). Best stories get featured on the podcast.</p>
+      <button type="submit" style="background:var(--accent);color:#fff;font-family:'Archivo Black',sans-serif;font-size:14px;text-transform:uppercase;letter-spacing:3px;padding:18px 36px;border:none;cursor:pointer;transition:all 0.2s;align-self:flex-start">Submit Your Story</button>
+    </form>
   </div>
 </div>
 
