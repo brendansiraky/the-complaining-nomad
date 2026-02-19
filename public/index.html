@@ -243,7 +243,48 @@
     filter: brightness(0.95) saturate(1);
     transform: scale(1.05);
   }
-  .card-img-wrap { overflow: hidden; }
+  .card-img-wrap { overflow: hidden; position: relative; }
+
+  /* Category color tints */
+  .card[data-category="hostel"] .card-img-wrap::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background: rgba(180,90,90,0.15); }
+  .card[data-category="transport"] .card-img-wrap::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background: rgba(61,122,150,0.15); }
+  .card[data-category="food"] .card-img-wrap::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background: rgba(74,122,84,0.15); }
+  .card[data-category="scam"] .card-img-wrap::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background: rgba(122,95,150,0.15); }
+  .card[data-category="surf"] .card-img-wrap::before { content:''; position:absolute; inset:0; z-index:1; pointer-events:none; background: rgba(90,143,154,0.15); }
+
+  /* Author avatar */
+  .card-avatar { width:22px; height:22px; border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:6px; }
+  .card-author { display:flex; align-items:center; gap:4px; }
+  .card-rating { color: var(--yellow); font-weight: 500; }
+
+  /* Card meta icons */
+  .card-meta .card-location::before { content: ''; display: inline-block; width:12px; height:12px; margin-right:4px; vertical-align: middle; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a7370' stroke-width='2'%3E%3Cpath d='M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z'/%3E%3Ccircle cx='12' cy='10' r='3'/%3E%3C/svg%3E") no-repeat center/contain; }
+  .card-meta .card-time::before { content: ''; display: inline-block; width:12px; height:12px; margin-right:4px; vertical-align: middle; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237a7370' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 6v6l4 2'/%3E%3C/svg%3E") no-repeat center/contain; }
+
+  /* Category header */
+  #category-header { display:none; padding: 40px 40px 0; max-width: 700px; }
+  #category-header.visible { display:block; }
+  #category-header h2 { font-family:'Archivo Black',sans-serif; font-size:36px; text-transform:uppercase; margin-bottom:8px; }
+  #category-header p { color:var(--text-muted); font-size:18px; font-style:italic; }
+
+  /* Most Complained About section */
+  .worst-section { padding: 60px 40px 80px; }
+  .worst-section .section-heading { font-family:'Archivo Black',sans-serif; font-size:14px; text-transform:uppercase; letter-spacing:4px; color:var(--text-muted); margin-bottom:8px; }
+  .worst-section .section-sub { color:var(--text-muted); font-size:15px; font-style:italic; margin-bottom:32px; }
+  .worst-grid { display:flex; flex-direction:column; gap:20px; }
+  .worst-card { display:grid; grid-template-columns: 280px 1fr; background:var(--surface2); border:1px solid var(--border); border-radius:8px; overflow:hidden; cursor:pointer; text-decoration:none; color:inherit; transition: transform 0.3s, box-shadow 0.3s; }
+  .worst-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .worst-card img { width:100%; height:100%; min-height:180px; object-fit:cover; }
+  .worst-card .worst-body { padding:28px; display:flex; flex-direction:column; justify-content:center; }
+  .worst-card h3 { font-family:'Archivo Black',sans-serif; font-size:18px; text-transform:uppercase; line-height:1.2; margin-bottom:8px; }
+  .worst-card .excerpt { color:var(--text-muted); font-size:14px; line-height:1.6; margin-bottom:12px; }
+  .worst-card .worst-rating { font-family:'Archivo Black',sans-serif; font-size:24px; color:var(--accent); }
+  .worst-card .worst-rating span { font-size:14px; color:var(--text-muted); }
+  @media (max-width: 768px) {
+    .worst-card { grid-template-columns: 1fr; }
+    .worst-card img { height: 200px; min-height: auto; }
+    #category-header { padding: 20px 20px 0; }
+  }
   .card-body { padding: 28px; position: relative; z-index: 1; }
   .card-badge {
     display: inline-block; font-family: 'Archivo Black', sans-serif;
@@ -454,6 +495,8 @@
 
   <div class="section-title">Latest Stories</div>
 
+  <div id="category-header"><h2 id="cat-title"></h2><p id="cat-blurb"></p></div>
+
   <div class="article-grid">
     <a class="card card-featured scroll-reveal" data-category="hostel" onclick="showPage('hostel')">
       <div class="card-img-wrap"><img class="card-img" src="https://images.unsplash.com/photo-1709805619372-40de3f158e83?w=800&q=75" alt=""></div>
@@ -462,8 +505,10 @@
         <h3>The Night I Paid Money to Sleep in a Crime Scene</h3>
         <p class="excerpt">A $4 hostel in Phnom Penh with generational bedbugs, a seatless toilet, and a 2am durian incident.</p>
         <div class="card-meta">
-          <span>Phnom Penh, Cambodia</span>
-          <span>8 min read</span>
+          <span class="card-location">Phnom Penh, Cambodia</span>
+          <span class="card-time">8 min read</span>
+          <span class="card-rating">⭐ 0.5/10</span>
+          <span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span>
         </div>
       </div>
     </a>
@@ -475,8 +520,10 @@
         <h3>Nineteen Hours, One Chicken, Zero Sleep</h3>
         <p class="excerpt">The La Paz to Uyuni overnight bus. A death-wish driver, broken seats, and a passenger named Roberto. Roberto was a chicken.</p>
         <div class="card-meta">
-          <span>Bolivia</span>
-          <span>9 min read</span>
+          <span class="card-location">Bolivia</span>
+          <span class="card-time">9 min read</span>
+          <span class="card-rating">⭐ 1/10</span>
+          <span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span>
         </div>
       </div>
     </a>
@@ -488,8 +535,10 @@
         <h3>The Lamb Tagine That Loved Me Back</h3>
         <p class="excerpt">Eleven hours in Marrakech before my intestines declared war. A 400-year-old riad, a hole-in-the-floor toilet, and a pulled thigh muscle.</p>
         <div class="card-meta">
-          <span>Marrakech, Morocco</span>
-          <span>8 min read</span>
+          <span class="card-location">Marrakech, Morocco</span>
+          <span class="card-time">8 min read</span>
+          <span class="card-rating">⭐ 2/10</span>
+          <span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span>
         </div>
       </div>
     </a>
@@ -501,8 +550,10 @@
         <h3>€40 for a Friendship Bracelet I Didn't Want</h3>
         <p class="excerpt">The tannery guide, the leather shop pressure cooker, and the moment three monkeys and a snake appeared on my body simultaneously.</p>
         <div class="card-meta">
-          <span>Marrakech, Morocco</span>
-          <span>9 min read</span>
+          <span class="card-location">Marrakech, Morocco</span>
+          <span class="card-time">9 min read</span>
+          <span class="card-rating">⭐ 3/10</span>
+          <span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span>
         </div>
       </div>
     </a>
@@ -512,7 +563,7 @@
         <div class="card-badge badge-hostel">Hostel Horrors</div>
         <h3>Too Old for This Hostel</h3>
         <p class="excerpt">I'm thirty. The neon lights don't have an off switch. Someone called Tyler wants to tell me how Southeast Asia changed him.</p>
-        <div class="card-meta"><span>Bangkok, Thailand</span><span>6 min read</span></div>
+        <div class="card-meta"><span class="card-location">Bangkok, Thailand</span><span class="card-time">6 min read</span><span class="card-rating">⭐ 1.5/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -522,7 +573,7 @@
         <div class="card-badge badge-transport">Transport Nightmares</div>
         <h3>Fourteen Euros and the Kebab at 30,000 Feet</h3>
         <p class="excerpt">A budget flight from an airport that technically exists near a city. Seats that don't recline. A man with a full doner kebab.</p>
-        <div class="card-meta"><span>Somewhere Over Europe</span><span>6 min read</span></div>
+        <div class="card-meta"><span class="card-location">Somewhere Over Europe</span><span class="card-time">6 min read</span><span class="card-rating">⭐ 2/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -532,7 +583,7 @@
         <div class="card-badge badge-food">Food Poisoning Diaries</div>
         <h3>The Lassi That Changed Everything</h3>
         <p class="excerpt">Three days of street food invincibility. Then a mango lassi near the ghats in Varanasi proved I am not, in fact, built different.</p>
-        <div class="card-meta"><span>Varanasi, India</span><span>6 min read</span></div>
+        <div class="card-meta"><span class="card-location">Varanasi, India</span><span class="card-time">6 min read</span><span class="card-rating">⭐ 1/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -542,7 +593,7 @@
         <div class="card-badge badge-scam">Scam Stories</div>
         <h3>The Meter Is Broken, My Friend</h3>
         <p class="excerpt">A Roman taxi driver, a scenic route through most of Lazio, and a fare that could have bought dinner at Roscioli. With wine.</p>
-        <div class="card-meta"><span>Rome, Italy</span><span>6 min read</span></div>
+        <div class="card-meta"><span class="card-location">Rome, Italy</span><span class="card-time">6 min read</span><span class="card-rating">⭐ 2.5/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -552,7 +603,7 @@
         <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
         <h3>Six Hours for a Lake</h3>
         <p class="excerpt">Flew to Bali. Bought a new board bag. The ocean was flat for an entire week. Davo back home posted pumping Cronulla.</p>
-        <div class="card-meta"><span>Bali, Indonesia</span><span>6 min read</span></div>
+        <div class="card-meta"><span class="card-location">Bali, Indonesia</span><span class="card-time">6 min read</span><span class="card-rating">⭐ 1/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -562,7 +613,7 @@
         <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
         <h3>The Reef Always Wins</h3>
         <p class="excerpt">Thought I was ready for Indonesian reef breaks. The ocean disagreed. My left leg looked like a dropped lasagna.</p>
-        <div class="card-meta"><span>Indonesia</span><span>7 min read</span></div>
+        <div class="card-meta"><span class="card-location">Indonesia</span><span class="card-time">7 min read</span><span class="card-rating">⭐ 2/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -572,7 +623,7 @@
         <div class="card-badge badge-transport">Transport Nightmares</div>
         <h3>The Overnight Train That Smelled Like Defeat</h3>
         <p class="excerpt">Bangkok to Chiang Mai on a sleeper with no AC, a stranger's feet near my face, and a mysterious wet patch at 2am.</p>
-        <div class="card-meta"><span>Thailand</span><span>7 min read</span></div>
+        <div class="card-meta"><span class="card-location">Thailand</span><span class="card-time">7 min read</span><span class="card-rating">⭐ 3/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -582,7 +633,7 @@
         <div class="card-badge badge-hostel">Hostel Horrors</div>
         <h3>The Hostel That Was Definitely Someone's Apartment</h3>
         <p class="excerpt">A fourth-floor walkup in Budapest where the owner slept on the couch and his cat slept on my bunk.</p>
-        <div class="card-meta"><span>Budapest, Hungary</span><span>7 min read</span></div>
+        <div class="card-meta"><span class="card-location">Budapest, Hungary</span><span class="card-time">7 min read</span><span class="card-rating">⭐ 1.5/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -592,7 +643,7 @@
         <div class="card-badge badge-food">Food Poisoning Diaries</div>
         <h3>The Street Meat Roulette</h3>
         <p class="excerpt">Five mystery skewers on Khao San Road at 2am. Six beers deep. The math didn't work out.</p>
-        <div class="card-meta"><span>Bangkok, Thailand</span><span>7 min read</span></div>
+        <div class="card-meta"><span class="card-location">Bangkok, Thailand</span><span class="card-time">7 min read</span><span class="card-rating">⭐ 2.5/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
@@ -602,11 +653,46 @@
         <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
         <h3>Outperformed by a Ten-Year-Old on a SpongeBob Board</h3>
         <p class="excerpt">Rented a board held together with duct tape. It snapped. The next one had no fins. Ended up bodyboarding.</p>
-        <div class="card-meta"><span>Weligama, Sri Lanka</span><span>6 min read</span></div>
+        <div class="card-meta"><span class="card-location">Weligama, Sri Lanka</span><span class="card-time">6 min read</span><span class="card-rating">⭐ 1/10</span><span class="card-author"><img src="/logo.jpg" class="card-avatar">The Complaining Nomad</span></div>
       </div>
     </a>
 
   </div>
+
+  <div class="worst-section">
+    <div class="section-heading">Most Complained About</div>
+    <p class="section-sub">Our lowest-rated disasters. You're welcome.</p>
+    <div class="worst-grid">
+      <a class="worst-card" onclick="showPage('hostel')">
+        <img src="https://images.unsplash.com/photo-1709805619372-40de3f158e83?w=800&q=75" alt="">
+        <div class="worst-body">
+          <div class="card-badge badge-hostel">Hostel Horrors</div>
+          <h3>The Night I Paid Money to Sleep in a Crime Scene</h3>
+          <p class="excerpt">A $4 hostel in Phnom Penh with generational bedbugs, a seatless toilet, and a 2am durian incident.</p>
+          <div class="worst-rating">0.5<span>/10</span></div>
+        </div>
+      </a>
+      <a class="worst-card" onclick="showPage('delhi')">
+        <img src="https://images.unsplash.com/photo-1766056586808-987b0ab63cdd?w=800&q=75" alt="">
+        <div class="worst-body">
+          <div class="card-badge badge-food">Food Poisoning Diaries</div>
+          <h3>The Lassi That Changed Everything</h3>
+          <p class="excerpt">Three days of street food invincibility. Then a mango lassi near the ghats in Varanasi proved I am not, in fact, built different.</p>
+          <div class="worst-rating">1<span>/10</span></div>
+        </div>
+      </a>
+      <a class="worst-card" onclick="showPage('surf-bali')">
+        <img src="https://images.unsplash.com/photo-1584874546125-20bde24f1088?w=800&q=75" alt="">
+        <div class="worst-body">
+          <div class="card-badge badge-surf">Surf Trips Gone Wrong</div>
+          <h3>Six Hours for a Lake</h3>
+          <p class="excerpt">Flew to Bali. Bought a new board bag. The ocean was flat for an entire week. Davo back home posted pumping Cronulla.</p>
+          <div class="worst-rating">1<span>/10</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
 </div>
 
 <!-- ==================== HOSTEL ARTICLE ==================== -->
@@ -1469,14 +1555,25 @@ function filterCategory(cat) {
   showPage('home');
   const cards = document.querySelectorAll('.card[data-category]');
   const title = document.querySelector('.section-title');
+  const catHeader = document.getElementById('category-header');
+  const catTitle = document.getElementById('cat-title');
+  const catBlurb = document.getElementById('cat-blurb');
+  const worstSection = document.querySelector('.worst-section');
   if (!cat) {
     cards.forEach(c => c.style.display = '');
     title.textContent = 'Latest Stories';
+    catHeader.classList.remove('visible');
+    if (worstSection) worstSection.style.display = '';
     return;
   }
   const names = {hostel:'Hostel Horrors',transport:'Transport Nightmares',food:'Food Poisoning Diaries',scam:'Scam Stories',surf:'Surf Trips Gone Wrong'};
+  const blurbs = {hostel:'Budget accommodation that should probably be condemned.',transport:'Buses, trains, and planes that tested our will to live.',food:'We ate it so you don\'t have to.',scam:'Every dollar lost is a lesson learned. Expensive lessons.',surf:'The ocean doesn\'t care about your Instagram.'};
   cards.forEach(c => c.style.display = c.dataset.category === cat ? '' : 'none');
   title.textContent = names[cat] || cat;
+  catTitle.textContent = names[cat] || cat;
+  catBlurb.textContent = blurbs[cat] || '';
+  catHeader.classList.add('visible');
+  if (worstSection) worstSection.style.display = 'none';
   document.querySelector('.section-title').scrollIntoView({behavior:'smooth'});
   initScrollReveal();
 }
