@@ -9,18 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f0f0f;
-    --surface: #1a1a1a;
-    --surface2: #222;
-    --text: #e8e4df;
-    --text-muted: #9a9590;
-    --accent: #e51a1a;
-    --accent-glow: #ff2d2d;
-    --yellow: #f5c842;
+    --bg: #131313;
+    --surface: #1c1b1a;
+    --surface2: #242220;
+    --text: #d9d4ce;
+    --text-muted: #8a8580;
+    --accent: #c4453a;
+    --accent-glow: #d4534b;
+    --yellow: #c9a456;
     --border: #2a2725;
-    --green: #4ecb71;
-    --blue: #4a9eff;
-    --purple: #b47aff;
+    --green: #7a9e82;
+    --blue: #6a8fa8;
+    --purple: #9a85b0;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -68,7 +68,7 @@
   /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(15,15,15,0.85); backdrop-filter: blur(20px);
+    background: rgba(19,19,19,0.85); backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 16px 40px;
     display: flex; align-items: center; justify-content: space-between;
@@ -115,15 +115,15 @@
   .home-hero::before {
     content: ''; position: absolute; top: -50%; left: -50%;
     width: 200%; height: 200%;
-    background: radial-gradient(ellipse at 50% 50%, rgba(229,26,26,0.08) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 50% 50%, rgba(196,69,58,0.08) 0%, transparent 50%);
     pointer-events: none;
     animation: heroGlow 8s ease-in-out infinite alternate;
   }
   .home-hero::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
     background:
-      radial-gradient(circle at 20% 80%, rgba(229,26,26,0.04) 0%, transparent 40%),
-      radial-gradient(circle at 80% 20%, rgba(245,200,66,0.03) 0%, transparent 40%);
+      radial-gradient(circle at 20% 80%, rgba(196,69,58,0.04) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(201,164,86,0.03) 0%, transparent 40%);
     animation: heroGlow2 12s ease-in-out infinite alternate;
   }
   @keyframes heroGlow {
@@ -140,7 +140,7 @@
   }
   .hero-particle {
     position: absolute; width: 2px; height: 2px; border-radius: 50%;
-    background: rgba(229,26,26,0.3);
+    background: rgba(196,69,58,0.3);
     animation: particleFloat linear infinite;
   }
   @keyframes particleFloat {
@@ -152,14 +152,14 @@
   .hero-logo {
     width: 180px; height: 180px; border-radius: 20px;
     object-fit: cover; margin-bottom: 32px;
-    box-shadow: 0 0 60px rgba(229,26,26,0.3), 0 20px 40px rgba(0,0,0,0.5);
-    border: 3px solid rgba(229,26,26,0.4);
+    box-shadow: 0 0 60px rgba(196,69,58,0.3), 0 20px 40px rgba(0,0,0,0.5);
+    border: 3px solid rgba(196,69,58,0.4);
     animation: heroLogoIn 1s ease-out 0.2s both;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
   }
   .hero-logo:hover {
     transform: scale(1.05) rotate(-2deg);
-    box-shadow: 0 0 80px rgba(229,26,26,0.5), 0 24px 48px rgba(0,0,0,0.6);
+    box-shadow: 0 0 80px rgba(196,69,58,0.5), 0 24px 48px rgba(0,0,0,0.6);
   }
   @keyframes heroLogoIn {
     from { opacity: 0; transform: scale(0.8) translateY(20px); }
@@ -222,13 +222,13 @@
   }
   .card::after {
     content: ''; position: absolute; inset: 0; opacity: 0;
-    background: linear-gradient(135deg, rgba(229,26,26,0.05) 0%, transparent 60%);
+    background: linear-gradient(135deg, rgba(196,69,58,0.05) 0%, transparent 60%);
     transition: opacity 0.4s ease;
   }
   .card:hover {
     border-color: var(--accent);
     transform: translateY(-8px) scale(1.01);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(229,26,26,0.1);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 30px rgba(196,69,58,0.1);
   }
   .card:hover::after { opacity: 1; }
   .card-img {
@@ -247,11 +247,11 @@
     font-size: 10px; text-transform: uppercase; letter-spacing: 3px;
     padding: 4px 12px; margin-bottom: 14px;
   }
-  .badge-hostel { background: #cc1111; color: #fff; }
+  .badge-hostel { background: #b05a5a; color: #fff; }
   .badge-transport { background: var(--blue); color: #fff; }
   .badge-food { background: var(--green); color: #000; }
   .badge-scam { background: var(--purple); color: #fff; }
-  .badge-surf { background: #00b4d8; color: #fff; }
+  .badge-surf { background: #5a8f9a; color: #fff; }
   .card h3 {
     font-family: 'Archivo Black', sans-serif; font-size: 20px;
     text-transform: uppercase; line-height: 1.2; margin-bottom: 12px;
@@ -277,7 +277,7 @@
   }
   .article-hero-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, var(--bg) 0%, rgba(15,15,15,0.6) 35%, transparent 100%);
+    background: linear-gradient(to top, var(--bg) 0%, rgba(19,19,19,0.6) 35%, transparent 100%);
   }
   .article-hero-content {
     position: relative; z-index: 2; padding: 0 40px 60px; max-width: 900px;
