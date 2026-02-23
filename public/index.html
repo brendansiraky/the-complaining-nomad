@@ -109,68 +109,63 @@
 
   /* HOME HERO */
   .home-hero {
-    height: 80vh; position: relative; overflow: hidden;
-    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto;
-    padding: 100px 40px 0;
-    background-color: #1a1714;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 120px 40px 60px; min-height: 90vh;
+    background: radial-gradient(ellipse 60% 50% at 50% 38%, rgba(196,69,58,0.07) 0%, transparent 70%),
+                linear-gradient(180deg, #f5f0eb 0%, #efe8e0 100%);
   }
-  .home-hero .hero-bg {
-    position: absolute; inset: 0; z-index: 0;
-    background: url('https://images.unsplash.com/photo-1721826496448-6efab036ed96?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1600&q=80') center/cover no-repeat;
+  .home-hero::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03; pointer-events: none;
   }
-  .home-hero .hero-bg::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(245,240,235,0.92) 0%, rgba(245,240,235,0.75) 50%, rgba(245,240,235,0.4) 100%);
+  .home-hero .hero-logo-wrap {
+    position: relative; z-index: 2; margin-bottom: 32px;
+    animation: heroLogoIn 0.8s ease-out 0.2s both;
   }
+  .hero-logo {
+    width: 280px; height: 280px; border-radius: 28px;
+    object-fit: cover;
+    box-shadow: 0 0 80px rgba(196,69,58,0.25), 0 16px 48px rgba(0,0,0,0.15);
+    border: 4px solid rgba(196,69,58,0.3);
+    transition: transform 0.4s ease;
+  }
+  .hero-logo:hover { transform: scale(1.04) rotate(-2deg); }
   .home-hero .hero-content {
     position: relative; z-index: 2;
-    display: flex; flex-direction: column; justify-content: center;
-    padding-right: 40px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
   }
   .home-hero .hero-the {
     font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
     text-transform: uppercase; letter-spacing: 6px; color: var(--text-muted);
     margin-bottom: 4px;
-    animation: heroTextIn 0.6s ease-out 0.2s both;
+    animation: heroTextIn 0.6s ease-out 0.4s both;
   }
   .home-hero .hero-complaining {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
-    line-height: 0.85; color: var(--text);
+    font-size: clamp(36px, 7vw, 80px); text-transform: uppercase;
+    line-height: 0.9; color: var(--text);
     margin-bottom: 0;
-    animation: heroTextIn 0.7s ease-out 0.35s both;
+    animation: heroTextIn 0.7s ease-out 0.5s both;
   }
   .home-hero .hero-nomad {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(48px, 8vw, 110px); text-transform: uppercase;
-    line-height: 0.85; color: var(--accent);
-    margin-left: clamp(40px, 5vw, 80px);
-    animation: heroAccentIn 0.7s ease-out 0.5s both;
+    font-size: clamp(36px, 7vw, 80px); text-transform: uppercase;
+    line-height: 0.9; color: var(--accent);
+    animation: heroAccentIn 0.7s ease-out 0.65s both;
   }
   .home-hero .hero-tagline {
     font-family: 'Caveat', cursive; font-size: clamp(22px, 3vw, 32px);
-    color: var(--yellow); margin-top: 24px;
-    transform: rotate(-2deg); transform-origin: left center;
-    animation: heroTextIn 0.8s ease-out 0.7s both;
+    color: var(--yellow); margin-top: 20px;
+    animation: heroTextIn 0.8s ease-out 0.8s both;
   }
   .home-hero .hero-sub {
-    color: var(--text-muted); max-width: 440px;
-    font-size: 15px; line-height: 1.7; margin-top: 20px;
-    animation: heroTextIn 0.8s ease-out 0.9s both;
+    color: var(--text-muted); max-width: 500px;
+    font-size: 15px; line-height: 1.7; margin-top: 16px;
+    animation: heroTextIn 0.8s ease-out 0.95s both;
   }
-  .home-hero .hero-side {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-logo {
-    width: 100px; height: 100px; border-radius: 14px;
-    object-fit: cover; position: absolute; right: 60px; top: 110px; z-index: 3;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    border: 3px solid rgba(196,69,58,0.4);
-    animation: heroLogoIn 0.8s ease-out 0.3s both;
-    transition: transform 0.4s ease;
-  }
-  .hero-logo:hover { transform: rotate(-4deg) scale(1.08); }
   @keyframes heroLogoIn {
     from { opacity: 0; transform: scale(0.8) rotate(4deg); }
     to { opacity: 1; transform: scale(1) rotate(0); }
@@ -184,9 +179,9 @@
     to { opacity: 1; transform: translateY(0) skewX(0); }
   }
   .hero-stats {
-    grid-column: 1 / -1; position: relative; z-index: 2;
+    position: relative; z-index: 2;
     display: flex; align-items: center; justify-content: center; gap: 32px;
-    padding: 16px 0 20px;
+    padding: 24px 0 0; margin-top: 28px;
     font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
     color: var(--text-muted); border-top: 1px solid rgba(44,39,36,0.1);
     animation: heroTextIn 0.8s ease-out 1.1s both;
@@ -455,11 +450,8 @@
   @media (max-width: 768px) {
     nav { padding: 12px 20px; }
     .nav-links { display: none; }
-    .home-hero { grid-template-columns: 1fr; padding: 100px 20px 0; height: auto; min-height: 80vh; }
-    .home-hero .hero-content { padding-right: 0; }
-    .home-hero .hero-nomad { margin-left: 20px; }
-    .hero-logo { right: 20px; top: 90px; width: 70px; height: 70px; }
-    .hero-side { display: none; }
+    .home-hero { padding: 100px 20px 40px; min-height: auto; }
+    .hero-logo { width: 200px; height: 200px; border-radius: 20px; }
     .hero-stats { flex-wrap: wrap; justify-content: center; gap: 12px; font-size: 11px; }
     .section-title, .article-grid { padding-left: 20px; padding-right: 20px; }
     .article-grid { grid-template-columns: 1fr; }
@@ -497,8 +489,9 @@
 <div id="page-home" class="page active">
 
   <div class="home-hero">
-    <div class="hero-bg"></div>
-    <img src="/logo.jpg" alt="The Complaining Nomad" class="hero-logo">
+    <div class="hero-logo-wrap">
+      <img src="/logo.jpg" alt="The Complaining Nomad" class="hero-logo">
+    </div>
     <div class="hero-content">
       <div class="hero-the">The</div>
       <div class="hero-complaining">Complaining</div>
@@ -506,11 +499,10 @@
       <p class="hero-tagline">Travel is beautiful. This blog is about the other times.</p>
       <p class="hero-sub">Real travellers. Raw stories. The stuff nobody posts on Instagram. Bad hostels, nightmare buses, food poisoning, scams, and places that just plain sucked.</p>
     </div>
-    <div class="hero-side"></div>
     <div class="hero-stats">
       <span>14 disasters documented</span><span class="dot">●</span>
-      <span>5 countries ruined</span><span class="dot">●</span>
-      <span>0 regrets (many regrets)</span>
+      <span>5 countries survived</span><span class="dot">●</span>
+      <span>0 complaints resolved</span>
     </div>
     <a href="#latest" class="hero-scroll">scroll<svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
   </div>
